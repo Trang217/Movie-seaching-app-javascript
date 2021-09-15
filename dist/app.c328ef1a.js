@@ -8212,7 +8212,7 @@ var container = document.querySelector(".container"); // UI
 function renderMovie(movie) {
   var movieDiv = document.createElement("div");
   var actors = movie.Actors.split(",");
-  movieDiv.innerHTML = "\n  \n      <div class=\"card card-body mb-3\">\n          <div class=\"row\">\n            <div class=\"col-md-3  text-center\">\n              <h3>".concat(movie.Title, "</h3>\n                <img class=\"img-fluid mb-1\" src=").concat(movie.Poster, ">\n            </div>\n\n            <div class=\"col-md-9\">\n\n            <span class=\"badge bg-info mt-5 p-2 mx-1\"> ").concat(actors[0], "</span>\n            <span class=\"badge bg-secondary p-2 mx-1\"> ").concat(actors[1], " </span>\n            <span class=\"badge bg-success p-2 mx-1\">").concat(actors[2], " </span>\n            \n             <br><br>\n\n             <ul class=\"list-group mt-3\">\n             <li class=\"list-group-item\"><b>Description:</b> ").concat(movie.Plot, "</li>\n             <li class=\"list-group-item\"><b>Genre:</b> ").concat(movie.Genre, "</li>\n             <li class=\"list-group-item\"><b>Duration:</b> ").concat(movie.Runtime, "</li>\n             <li class=\"list-group-item\"><b>Awards:</b> ").concat(movie.Awards, "</li>\n             <li class=\"list-group-item\"><b>Release from:  </b> ").concat(movie.Released, "</li>\n             <li class=\"list-group-item\"><b>Language:</b> ").concat(movie.Language, "</li>\n             <li class=\"list-group-item\"><b>Writer:</b> ").concat(movie.Writer, "</li>\n             <li class=\"list-group-item\"><b>Revenue:</b> ").concat(movie.BoxOffice, "</li>\n             <li class=\"list-group-item\"><b>Rating:</b> ").concat(movie.imdbRating, "</li>\n             </ul>\n\n            </div>\n        </div>\n    </div>\n  ");
+  movieDiv.innerHTML = "\n  \n      <div class=\"card card-body mb-3\">\n          <div class=\"row\">\n            <div class=\"col-md-3  text-center\">\n              <h3>".concat(movie.Title, "</h3>\n                <img class=\"img-fluid mb-1 mb-5\" src=").concat(movie.Poster, ">\n            </div>\n\n            <div class=\"col-md-9\">\n\n            <span class=\"badge bg-info my-1 p-2 mx-1\"> ").concat(actors[0], "</span>\n            <span class=\"badge bg-secondary my-1 p-2 mx-1\"> ").concat(actors[1], " </span>\n            <span class=\"badge bg-success my-1 p-2 mx-1\">").concat(actors[2], " </span>\n            \n             <br><br>\n\n             <ul class=\"list-group mt-3\">\n             <li class=\"list-group-item\"><b>Description:</b> ").concat(movie.Plot, "</li>\n             <li class=\"list-group-item\"><b>Genre:</b> ").concat(movie.Genre, "</li>\n             <li class=\"list-group-item\"><b>Duration:</b> ").concat(movie.Runtime, "</li>\n             <li class=\"list-group-item\"><b>Awards:</b> ").concat(movie.Awards, "</li>\n             <li class=\"list-group-item\"><b>Release from:  </b> ").concat(movie.Released, "</li>\n             <li class=\"list-group-item\"><b>Language:</b> ").concat(movie.Language, "</li>\n             <li class=\"list-group-item\"><b>Writer:</b> ").concat(movie.Writer, "</li>\n             <li class=\"list-group-item\"><b>Revenue:</b> ").concat(movie.BoxOffice, "</li>\n             <li class=\"list-group-item\"><b>Rating:</b> ").concat(movie.imdbRating, "</li>\n             </ul>\n\n            </div>\n        </div>\n    </div>\n  ");
   movieContainer.appendChild(movieDiv);
 }
 
@@ -8267,12 +8267,14 @@ function searchMovieStr(str) {
     return response.json();
   }).then(function (data) {
     if (!data.Search) renderAlert("Please insert correct name", "text-center alert alert-danger");
-    console.log(data.Search), data.Search.forEach(function (item) {
+    localStorage.setItem("movieInLocalStorage", JSON.stringify(data.Search));
+    var storedData = JSON.parse(localStorage.movieInLocalStorage);
+    storedData.forEach(function (item) {
       searchMovieID(item.imdbID);
     });
   }).catch(function (err) {
     return console.log("something went wrong");
-  }); // array of object containing imdbID
+  });
 } // adding event
 
 
@@ -8309,7 +8311,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44127" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34217" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
